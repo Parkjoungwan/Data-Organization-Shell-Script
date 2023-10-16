@@ -24,7 +24,7 @@ foreach ($file in $xlsFiles) {
     # 열려있는 Excel 워크북 닫기
     $workbook.Close()
 
-    Write-Host "파일 $($file.Name) changed xls to xlsx."
+    Write-Host "file $($file.Name) changed xls to xlsx."
 }
 
 # Excel 종료
