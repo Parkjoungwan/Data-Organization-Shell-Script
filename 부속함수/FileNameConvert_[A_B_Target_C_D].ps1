@@ -1,3 +1,8 @@
+# 사용자로부터 입력 받기
+Write-Host "Sample Pattern [A_B_<Target>_C_D]"
+$clinicName = Read-Host "Please input target name:"
+
+
 # 디렉토리 내의 파일 목록 가져오기
 $files = Get-ChildItem
 
@@ -9,18 +14,15 @@ foreach ($file in $files) {
 
     # 파일 이름 분해
     $parts = $fileName -split "_"
-    
-    # 년월과 일 분리
-    $yyyymm = $parts[0].Substring(0, 6)
-    $dd = $parts[0].Substring(6, 2)
 
     # 확장자 제거
-    $nameWithoutExtension = $parts[3] -replace $extension, ""
+    $nameWithoutExtension = $parts[4] -replace $extension, ""
     
     # 새 파일 이름 생성
-    $newName = $yyyymm + "_" + $parts[1] + "_" + $parts[2] + "_" + $nameWithoutExtension + "_" + $yyyymm + $dd + $extension
+    $newName = $parts[0] + "_" + $parts[1] + "_" + $clinicName + "_" + $parts[3] + "_" +$parts[4] + $extension
     
     # 새 파일 이름으로 파일 이름 변경
     Rename-Item -Path $file.FullName -NewName $newName
 }
 
+Write-Host "Converted!"

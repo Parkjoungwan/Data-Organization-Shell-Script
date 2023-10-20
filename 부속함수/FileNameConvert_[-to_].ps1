@@ -35,3 +35,5 @@ foreach ($file in $files) {
         Rename-Item -Path $file.FullName -NewName $newName
     }
 }
+
+Write-Host "Converted!"

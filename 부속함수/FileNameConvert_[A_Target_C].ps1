@@ -1,5 +1,7 @@
+Write-Host "Sample Pattern [A_<Target>_C]"
+
 # 사용자로부터 입력 받기
-$clinicName = Read-Host "Please enter the hospital name:"
+$targetName = Read-Host "Please input TargetName:"
 
 # 디렉토리 내의 파일 목록 가져오기
 $files = Get-ChildItem
@@ -14,11 +16,13 @@ foreach ($file in $files) {
     $parts = $fileName -split "_"
 
     # 확장자 제거
-    $nameWithoutExtension = $parts[4] -replace $extension, ""
+    $nameWithoutExtension = $parts[2] -replace $extension, ""
     
     # 새 파일 이름 생성
-    $newName = $parts[0] + "_" + $parts[1] + "_" + $clinicName + "_" + $parts[3] + "_" +$parts[4] + $extension
+    $newName = $parts[0] + "_" + $targetName + "_" + $nameWithoutExtension + $extension
     
     # 새 파일 이름으로 파일 이름 변경
     Rename-Item -Path $file.FullName -NewName $newName
 }
+
+Write-Host "Converted!"
